@@ -1,11 +1,16 @@
+
+import {Separator} from "@/components/ui/separator";
+
 import { ThemeProvider } from '@/app/providers'
 import { Container } from '@/components/Container'
-import { Navigation } from '@/components/Navigation'
-import ThemeSwitch from '@/components/ThemeSwitch'
+import { NavBar } from '@/components/NavBar'
 import { WEBSITE_HOST_URL } from '@/lib/constants'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import './global.css'
+import { Inter as FontSans } from 'next/font/google'
+import { cn } from '@/lib/utils'
+
 
 const meta = {
   title: 'TaeYeong Lee - Website',
@@ -13,6 +18,22 @@ const meta = {
     '隨處作主 立處皆眞',
   image: `${WEBSITE_HOST_URL}/og-preview.jpg`,
 }
+
+const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+})
+
+const menu = [
+  {
+      name: "Home",
+      href: "/"
+  },
+  {
+      name: "About",
+      href: "/about"
+  }
+]
 
 export const metadata: Metadata = {
   title: {
@@ -50,26 +71,28 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body>
+    <html lang="en"
+          className={'scroll-smooth'}
+    >
+      <body
+          className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          fontSans.variable
+        )}
+      >
         <ThemeProvider attribute="class" defaultTheme="dark">
-          <header className="py-4">
-            <Container>
-              <div className="flex items-center justify-between py-6">
-                <Navigation />
-                <ThemeSwitch />
-              </div>
-            </Container>
+          <header className={'w-full sticky top-0'}>
+                <NavBar menus={menu}/>
           </header>
-          <main>
+          <main className={'py-16'}>
             <Container>{children}</Container>
           </main>
           <footer className="py-16">
             <Container>
               <p>
                 Built by{' '}
-                <Link className="link" href="https://twitter.com/hunterhchang">
-                  Hunter Chang
+                <Link className="link" href="https://github.com/10yii">
+                  10yii
                 </Link>
               </p>
             </Container>

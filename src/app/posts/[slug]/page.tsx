@@ -7,8 +7,8 @@ import { useMDXComponent } from 'next-contentlayer/hooks'
 import NextImage from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-
-//
+import { parseHeadersForTOC } from '@/lib/toc';
+import TOC from "@/components/mdx/TOC";
 
 export async function generateStaticParams() {
   return allPosts.map((post) => ({
@@ -63,6 +63,10 @@ const PostLayout = ({ params }: { params: { slug: string } }) => {
   }
 
   const MDXContent = useMDXComponent(post.body.code)
+  const headings = parseHeadersForTOC(post.body.raw)
+
+  console.log(headings);
+
 
   return (
     <div>
@@ -70,8 +74,16 @@ const PostLayout = ({ params }: { params: { slug: string } }) => {
       <time className="my-4 block text-sm text-zinc-400" dateTime={post.date}>
         {format(parseISO(post.date), 'LLLL d, yyyy')}
       </time>
-      <article className="prose dark:prose-invert">
-        <MDXContent components={mdxComponents} />
+
+      <article className="w-full flex flex-nowrap gap-5">
+        <div className="w-full prose dark:prose-invert max-w-3xl">
+          <MDXContent components={mdxComponents}/>
+        </div>
+        <div className="hidden lg:block min-w-[200px] max-w-[250px]">
+          <div className="sticky top-[80px] h-fit">
+            <TOC tableOfContents={headings}></TOC>
+          </div>
+        </div>
       </article>
     </div>
   )
