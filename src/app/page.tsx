@@ -12,7 +12,7 @@ export default function Home() {
 
   return (
     <div>
-      <div className="space-y-7">
+      <div className="space-y-7 py-16">
         <h1>Home Page</h1>
         <p>
           Next.js starter template for your next blog or personal site. Built

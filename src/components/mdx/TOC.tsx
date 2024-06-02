@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
 import {clsx} from "clsx";
 
+import { Card } from "@/components/ui/card";
+
 const numberToStringMap = {
     1: 'one',
     2: 'two',
@@ -89,19 +91,21 @@ const TocSide = ({ tableOfContents }: TocSideProps) => {
     return (
         <>
             {tableOfContents.length ? (
-                <ul className="pl-2 pr-1">
-                    <div className ="text-lg font-medium dark:border-gray-700 pb-1">Table of Contents</div>
-                    {tableOfContents.map((toc, i) => (
-                        <li
-                            data-level={numberToStringMap[toc.level]}
-                            key={i}
-                            className={clsx(`${activeToc === toc.slug ? 'active' : ''}`,
-                            'pl-2 border-l-2 border-gray-100 first-of-type:pt-2 py-1 text-gray-400 text-sm hover:text-gray-800 dark:hover:text-gray-200 transition-all data-[level=two]:pl-4 data-[level=three]:pl-6')}
-                        >
-                            <Link href={`#${toc.slug}`}>{toc.text}</Link>
-                        </li>
-                    ))}
-                </ul>
+                <Card>
+                    <ul className="pl-2 py-2 pb-4 pr-1">
+                        <div className ="text-lg font-medium dark:border-gray-700 pb-1">Table of Contents</div>
+                        {tableOfContents.map((toc, i) => (
+                            <li
+                                data-level={numberToStringMap[toc.level]}
+                                key={i}
+                                className={clsx(`${activeToc === toc.slug ? 'active' : ''}`,
+                                'pl-2 border-l-2 border-gray-100 first-of-type:pt-2 py-1 text-gray-400 text-sm hover:text-gray-800 dark:hover:text-gray-200 transition-all data-[level=two]:pl-4 data-[level=three]:pl-6')}
+                            >
+                                <Link href={`#${toc.slug}`}>{toc.text}</Link>
+                            </li>
+                        ))}
+                    </ul>
+                </Card>
             ) : null}
         </>
     );

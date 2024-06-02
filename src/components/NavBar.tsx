@@ -10,6 +10,7 @@ import { usePathname } from "next/navigation"
 import {cn} from '@/lib/utils';
 import {useTheme} from "next-themes";
 import {ThemeSwitch} from "@/components/ThemeSwitch";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 
 export interface NavBarProps {
@@ -25,6 +26,11 @@ export function NavBar({ menus }: { menus: NavBarProps[] }) {
     return (
     <div className="top-0 flex h-14 items-center gap-4 border-b backdrop-blur bg-transparent px-4 md:px-6">
       <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
+
+        <Avatar>
+          <AvatarImage src="https://github.com/10yii.png" />
+          <AvatarFallback>Tenyi</AvatarFallback>
+        </Avatar>
         <Link
           href="/"
           className="flex items-center gap-2 text-lg font-semibold md:text-base"

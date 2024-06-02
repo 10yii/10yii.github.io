@@ -9,6 +9,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { parseHeadersForTOC } from '@/lib/toc';
 import TOC from "@/components/mdx/TOC";
+import { Progress } from "@/components/ui/progress";
 
 export async function generateStaticParams() {
   return allPosts.map((post) => ({
@@ -65,11 +66,10 @@ const PostLayout = ({ params }: { params: { slug: string } }) => {
   const MDXContent = useMDXComponent(post.body.code)
   const headings = parseHeadersForTOC(post.body.raw)
 
-  console.log(headings);
 
 
   return (
-    <div>
+    <div  className={'py-16'}>
       <h1>{post.title}</h1>
       <time className="my-4 block text-sm text-zinc-400" dateTime={post.date}>
         {format(parseISO(post.date), 'LLLL d, yyyy')}
@@ -86,6 +86,7 @@ const PostLayout = ({ params }: { params: { slug: string } }) => {
         </div>
       </article>
     </div>
+
   )
 }
 

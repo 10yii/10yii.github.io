@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 
 export default function About() {
   return (
-    <div className="space-y-7">
+    <div className="space-y-7 py-16">
       <h1>About</h1>
       <p>Welcome to the about page</p>
     </div>

@@ -10,6 +10,7 @@ import Link from 'next/link'
 import './global.css'
 import { Inter as FontSans } from 'next/font/google'
 import { cn } from '@/lib/utils'
+import ScrollProgress from "@/components/ScrollProgress";
 
 
 const meta = {
@@ -82,9 +83,10 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="dark">
           <header className={'w-full sticky top-0'}>
-                <NavBar menus={menu}/>
+            <NavBar menus={menu}/>
+            <ScrollProgress />
           </header>
-          <main className={'py-16'}>
+          <main>
             <Container>{children}</Container>
           </main>
           <footer className="py-16">
