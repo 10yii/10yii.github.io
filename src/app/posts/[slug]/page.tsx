@@ -9,8 +9,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { parseHeadersForTOC } from '@/lib/toc';
 import TOC from "@/components/mdx/TOC";
-import { Progress } from "@/components/ui/progress";
-
+import Comment from "@/components/ui/Comment";
 export async function generateStaticParams() {
   return allPosts.map((post) => ({
     slug: post._raw.flattenedPath,
@@ -78,6 +77,7 @@ const PostLayout = ({ params }: { params: { slug: string } }) => {
       <article className="w-full flex flex-nowrap gap-5">
         <div className="w-full prose dark:prose-invert max-w-3xl">
           <MDXContent components={mdxComponents}/>
+          <Comment/>
         </div>
         <div className="hidden lg:block min-w-[200px] max-w-[250px]">
           <div className="sticky top-[80px] h-fit">
